@@ -1,0 +1,14 @@
+{
+  "name": "artgorbunov-publishing-canvas-cover-proof-of-concept",
+  "version": "0.0.0",
+  "description": "Check if canvas cover will work smoother on tablets",
+  "scripts": {
+    "start": "webpack-dev-server --open"
+  },
+  "dependencies": {
+    "webpack": "2.4.1",
+    "webpack-dev-server": "2.4.4"
+  },
+  "author": "Aleksander Terekhov (https://www.terales.info/)",
+  "license": "MIT"
+}

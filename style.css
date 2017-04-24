@@ -1,0 +1,15 @@
+:root {
+  --cover-height: calc(100vh + 500px);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+.coverContainer {
+  height: var(--cover-height);
+  border-bottom: 1px solid lightgray;
+}
+
+.bookWrapper {
+  margin: var(--cover-height) 0;
+}
