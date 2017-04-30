@@ -10,8 +10,6 @@ export default class Face {
     this.marginLeft = viewWidth / 2 - this.width / 2  // centered
     this.marginTop = this.height * 0.1
 
-    this.scaleX = this.setUpScaleX()
-
   /**
    * @todo #2/DEV Extract image loading into separate class.
    *  Images also loaded in the ./Endpaper.js
@@ -23,11 +21,9 @@ export default class Face {
   }
 
   render (scroll) {    
-    //this.drawFullImage(this.frontImg)
-    //this.drawFullImage(this.faceImg)
-    //this.drawText()
-
-    this.drawFacePath(scroll)
+    this.drawFullImage(this.frontImg)
+    this.drawFullImage(this.faceImg)
+    this.drawText()
   }
 
   loadFront () {
@@ -59,32 +55,14 @@ export default class Face {
   }
 
   drawText () {
-    this.context.fillStyle = '#fff'
+    const marginLeft = Math.round(this.width * 0.08)
+    this.context.fillStyle = '#fff'    
     
     this.context.font = '19px serif';
-    this.context.fillText('Илья Бирман', 35, 470)
+    this.context.fillText('Илья Бирман', marginLeft, Math.round(this.height * 0.72))
 
     this.context.font = '42px serif';
-    this.context.fillText('Пользовательский', 33, 525)
-    this.context.fillText('интерфейс', 33, 565)
-  }
-
-  drawFacePath (scroll) {
-    this.context.beginPath()
-    this.context.moveTo(0, 0)
-    this.context.lineTo(this.width * scroll, 0)
-    this.context.lineTo(this.width * scroll, this.height)
-    this.context.lineTo(0, this.height)
-    this.context.closePath()
-    this.context.fill()
-  }
-
-  setUpScaleX () {
-    return new LogarithmicScale({
-      minPos: 1,
-      maxPos: 0,
-      minVal: this.width,
-      maxVal: 0.1
-    })
+    this.context.fillText('Пользовательский', marginLeft, Math.round(this.height * 0.79))
+    this.context.fillText('интерфейс', marginLeft, Math.round(this.height * 0.79) + 42)
   }
 }

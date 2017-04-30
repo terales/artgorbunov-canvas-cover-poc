@@ -1,6 +1,7 @@
 import BookPosition from './BookPosition'
 import Face from './Face'
 import Endpaper from './Endpaper'
+import HardCover from './HardCover'
 
 const COVER_COLOR = '#fc5620'
 const ASPECT_RATIO = 0.71
@@ -10,8 +11,6 @@ init()
 function init () {
   const width = window.innerWidth
   const height = window.innerHeight
-
-  console.log(width, height)
 
   const canvases = document.querySelectorAll('.cover canvas')
   const contexts = {}
@@ -23,13 +22,14 @@ function init () {
 
   const options = {
     viewWidth: width,
-    viewHeight: window.innerHeight,
+    viewHeight: height,
     aspectRatio: ASPECT_RATIO
   }
 
   const bookPosition = new BookPosition(contexts, options)
   const face = new Face(contexts['face'], options)
   const endpaper = new Endpaper(contexts['rightendpaper'], options)
+  const hardCover = new HardCover(document.querySelector('.hardCover'), options)
 
   const enchancedRender = render.bind({
     contexts,
@@ -37,7 +37,8 @@ function init () {
     height,
     face,
     endpaper,
-    bookPosition
+    bookPosition,
+    hardCover
   })
 
   face.allAssetsLoaded.then(startRendering.bind(null, enchancedRender))
@@ -65,7 +66,8 @@ function render () {
   this.bookPosition.setTopLeftPosition(scroll)
 
   this.endpaper.render(scroll)
-  // this.face.render(scroll)
+  this.face.render(scroll)
+  this.hardCover.flip(scroll)
 }
 
 function clearCanvas (context, width, height) {
