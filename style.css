@@ -10,6 +10,11 @@ html, body { margin: 0; padding: 0; }
   border-bottom: 1px solid lightgray;
 }
 
+.cover {
+  width: 100%;
+  height: 100%;
+}
+
 .bookWrapper {
   margin: var(--cover-height) 0;
 }
