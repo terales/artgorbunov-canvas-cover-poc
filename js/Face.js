@@ -22,7 +22,7 @@ export default class Face {
     const left = step * this.marginLeft
     const top = step * this.marginTop
 
-    this.context.setTransform(1, 0, 0, 1, left, top)
+    this.context.transform(1, 0, 0, 1, 0, 0)
 
     this.drawFullImage(this.frontImg)
     this.drawFullImage(this.faceImg)

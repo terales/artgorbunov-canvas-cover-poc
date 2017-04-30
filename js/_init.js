@@ -62,7 +62,7 @@ function render () {
   this.endpaper.render(scroll)
   this.context.restore()
 
-  //this.face.render(scroll)
+  this.face.render(scroll)
 }
 
 function getScrollPercentage (scrollOffset) {

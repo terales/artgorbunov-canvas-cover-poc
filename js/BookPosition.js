@@ -8,14 +8,16 @@ export default class BookPosition {
     this.width = viewHeight * aspectRatio
     this.leftScale = this.setUpLeftScale()
     this.topScale = this.setUpTopScale()
+    this.zoomScale = this.setUpZoomScale()
   }
 
   setTopLeftPosition (scroll) {
+    const zoom = this.zoomScale.value(scroll)
     this.context.setTransform(
-      1,
+      zoom,
       0,
       0,
-      1,
+      zoom,
       this.leftScale.value(scroll),
       this.topScale.value(scroll)
     )
@@ -36,6 +38,15 @@ export default class BookPosition {
       maxPos: 0,
       minVal: this.viewHeight * 0.1,
       maxVal: 0.1
+    })
+  }
+
+  setUpZoomScale () {
+    return new LogarithmicScale({
+      minPos: 1,
+      maxPos: 0,
+      minVal: 1,
+      maxVal: 1.44
     })
   }
 }

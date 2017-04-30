@@ -9,7 +9,6 @@ export default class Endpaper {
     this.width = this.height * aspectRatio
     this.marginLeft = viewWidth / 2 - this.width / 2  // centered
     this.marginTop = this.height * 0.1
-    this.zoomScale = this.setUpZoomScale()
 
     this.allAssetsLoaded = Promise.all([
       this.loadMaterial(aspectRatio)
@@ -22,8 +21,6 @@ export default class Endpaper {
     *  there is a gap between right edge of the endpaper
     *  and right side of the screen
     */
-    const zoom = this.zoomScale.value(scroll)
-    this.context.transform(zoom, 0, 0, zoom, 0, 0)
 
     this.context.drawImage(
       this.materialImg,
@@ -32,15 +29,6 @@ export default class Endpaper {
       this.width,
       this.height
     )
-  }
-
-  setUpZoomScale () {
-    return new LogarithmicScale({
-      minPos: 1,
-      maxPos: 0,
-      minVal: 1,
-      maxVal: 1.44
-    })
   }
 
   loadMaterial (aspectRatio) {
