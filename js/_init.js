@@ -4,10 +4,6 @@ import Endpaper from './Endpaper'
 const COVER_COLOR = '#fc5620'
 const ASPECT_RATIO = .71
 
-// TODO Animate on appearance (on image load)
-// Implement page flip with https://yuiblog.com/blog/2008/06/23/slicing/
-// Implement images changes on cover flip
-
 init()
 
 function init () {
