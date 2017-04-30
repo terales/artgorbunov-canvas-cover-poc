@@ -8,27 +8,31 @@ const ASPECT_RATIO = 0.71
 init()
 
 function init () {
-  const canvas = document.querySelector('.cover')
-  const context = canvas.getContext('2d')
-  const width = canvas.scrollWidth
-  const height = canvas.scrollHeight
-  canvas.width = width
-  canvas.height = height
+  const width = window.innerWidth
+  const height = window.innerHeight
+
+  console.log(width, height)
+
+  const canvases = document.querySelectorAll('.cover canvas')
+  const contexts = {}
+  canvases.forEach(canvas => {
+    canvas.width = width
+    canvas.height = height
+    contexts[canvas.className] = canvas.getContext('2d')
+  })
 
   const options = {
-    context,
     viewWidth: width,
     viewHeight: window.innerHeight,
     aspectRatio: ASPECT_RATIO
   }
 
-  const bookPosition = new BookPosition(options)
-  const face = new Face(options)
-  const endpaper = new Endpaper(options)
+  const bookPosition = new BookPosition(contexts, options)
+  const face = new Face(contexts['face'], options)
+  const endpaper = new Endpaper(contexts['rightendpaper'], options)
 
   const enchancedRender = render.bind({
-    canvas: canvas,
-    context,
+    contexts,
     width,
     height,
     face,
@@ -55,14 +59,18 @@ function render () {
   */
   const scroll = 1 - getScrollPercentage(window.pageYOffset)
 
-  this.context.clearRect(0, 0, this.width, this.height)
+  Object.keys(this.contexts).forEach(name => {
+    clearCanvas(this.contexts[name], this.width, this.height)
+  })
   this.bookPosition.setTopLeftPosition(scroll)
-  this.context.save()
 
   this.endpaper.render(scroll)
-  this.context.restore()
+  // this.face.render(scroll)
+}
 
-  this.face.render(scroll)
+function clearCanvas (context, width, height) {
+  context.setTransform(1, 0, 0, 1, 0, 0)
+  context.clearRect(0, 0, width, height)
 }
 
 function getScrollPercentage (scrollOffset) {

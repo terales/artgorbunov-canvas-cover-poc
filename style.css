@@ -14,6 +14,14 @@ ul { margin-top: 0 }
   height: 100vh;
 }
 
+.cover canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .bookWrapper {
   position: relative;
   margin-top: calc(100vh + 500px);

@@ -1,7 +1,5 @@
-import LogarithmicScale from './LogarithmicScale'
-
 export default class Endpaper {
-  constructor ({context, viewWidth, viewHeight, aspectRatio}) {
+  constructor (context, {viewWidth, viewHeight, aspectRatio}) {
     this.context = context
     this.viewHeight = viewHeight
     this.viewWidth = viewWidth

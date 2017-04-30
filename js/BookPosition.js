@@ -1,8 +1,8 @@
 import LogarithmicScale from './LogarithmicScale'
 
 export default class BookPosition {
-  constructor ({context, viewWidth, viewHeight, aspectRatio}) {
-    this.context = context
+  constructor (contexts, {viewWidth, viewHeight, aspectRatio}) {
+    this.contexts = contexts
     this.viewHeight = viewHeight
     this.viewWidth = viewWidth
     this.width = viewHeight * aspectRatio
@@ -13,14 +13,16 @@ export default class BookPosition {
 
   setTopLeftPosition (scroll) {
     const zoom = this.zoomScale.value(scroll)
-    this.context.setTransform(
-      zoom,
-      0,
-      0,
-      zoom,
-      this.leftScale.value(scroll),
-      this.topScale.value(scroll)
-    )
+    Object.keys(this.contexts).forEach(name => {
+      this.contexts[name].setTransform(
+        zoom,
+        0,
+        0,
+        zoom,
+        this.leftScale.value(scroll),
+        this.topScale.value(scroll)
+      )
+    })
   }
 
   setUpLeftScale () {
@@ -44,7 +46,7 @@ export default class BookPosition {
   setUpZoomScale () {
     return new LogarithmicScale({
       minPos: 1,
-      maxPos: 0,
+      maxPos: 0.15,
       minVal: 1,
       maxVal: 1.44
     })
