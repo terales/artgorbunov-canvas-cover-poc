@@ -1,7 +1,7 @@
 {
-  "name": "artgorbunov-publishing-canvas-cover-proof-of-concept",
+  "name": "artgorbunov-canvas-cover-poc",
   "version": "0.0.0",
-  "description": "Check if canvas cover will work smoother on tablets",
+  "description": "Book cover canvas proof of concept. For Bureau Gorbunov Publishing",
   "scripts": {
     "start": "webpack-dev-server --open"
   },

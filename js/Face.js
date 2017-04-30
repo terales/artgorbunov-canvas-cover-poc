@@ -6,6 +6,10 @@ export default class Face {
     this.marginLeft = viewWidth / 2 - this.width / 2  // centered
     this.marginTop = this.height * 0.1
 
+  /**
+   * @todo #2/DEV Extract image loading into separate class.
+   *  Images also loaded in the ./Endpaper.js
+   */
     this.allAssetsLoaded = Promise.all([
       this.loadFront(),
       this.loadFace()
