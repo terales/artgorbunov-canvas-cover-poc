@@ -34,13 +34,13 @@ function init () {
     endpaper
   })
 
-  face.allAssetsLoaded.then(startRendering.bind(null, enchancedRender, height))
+  face.allAssetsLoaded.then(startRendering.bind(null, enchancedRender))
 }
 
-function startRendering (enchancedRender, height) {
+function startRendering (enchancedRender) {
   window.requestAnimationFrame(enchancedRender)
   window.addEventListener('scroll', event => {
-    const scroll = getScrollPercentage(document.body.scrollTop, height)
+    const scroll = getScrollPercentage(window.pageYOffset)
     if (scroll < 1) {
       window.requestAnimationFrame(enchancedRender)
     }
@@ -48,8 +48,10 @@ function startRendering (enchancedRender, height) {
 }
 
 function render () {
-  const scroll = 1 - getScrollPercentage(document.body.scrollTop, this.height)
-  console.log('render')
+ /**
+  * @todo #4/DEV Remove duplication of scroll calculation
+  */
+  const scroll = 1 - getScrollPercentage(window.pageYOffset)
 
   this.context.clearRect(0, 0, this.width, this.height)
   this.context.save()
@@ -60,6 +62,6 @@ function render () {
   this.face.render(scroll)
 }
 
-function getScrollPercentage (scrollTop, scrollHeight) {
-  return scrollTop / scrollHeight
+function getScrollPercentage (scrollOffset) {
+  return scrollOffset / 500 // scroll within 500px will trigger animation
 }
