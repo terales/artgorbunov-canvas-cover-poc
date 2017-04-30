@@ -7,12 +7,18 @@ p { margin-bottom: 0 }
 ul { margin-top: 0 }
 
 .cover {
+  position: fixed;
+  top: 0;
+  display: block;
   width: 100%;
-  height: calc(100vh + 500px);
+  height: 100vh;
 }
 
 .bookWrapper {
+  position: relative;
+  margin-top: calc(100vh + 500px);
   padding: 50vh 10vh 0;
   height: 100vh;
   border-top: 1px solid lightgray;
+  background-color: #fff;
 }

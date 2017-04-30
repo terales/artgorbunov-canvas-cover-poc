@@ -1,8 +1,9 @@
+import BookPosition from './BookPosition'
 import Face from './Face'
 import Endpaper from './Endpaper'
 
 const COVER_COLOR = '#fc5620'
-const ASPECT_RATIO = .71
+const ASPECT_RATIO = 0.71
 
 init()
 
@@ -21,8 +22,8 @@ function init () {
     aspectRatio: ASPECT_RATIO
   }
 
+  const bookPosition = new BookPosition(options)
   const face = new Face(options)
-
   const endpaper = new Endpaper(options)
 
   const enchancedRender = render.bind({
@@ -31,7 +32,8 @@ function init () {
     width,
     height,
     face,
-    endpaper
+    endpaper,
+    bookPosition
   })
 
   face.allAssetsLoaded.then(startRendering.bind(null, enchancedRender))
@@ -54,12 +56,13 @@ function render () {
   const scroll = 1 - getScrollPercentage(window.pageYOffset)
 
   this.context.clearRect(0, 0, this.width, this.height)
+  this.bookPosition.setTopLeftPosition(scroll)
   this.context.save()
 
-  this.endpaper.render(scroll)    
+  this.endpaper.render(scroll)
   this.context.restore()
 
-  this.face.render(scroll)
+  //this.face.render(scroll)
 }
 
 function getScrollPercentage (scrollOffset) {
