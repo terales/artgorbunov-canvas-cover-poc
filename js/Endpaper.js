@@ -1,3 +1,5 @@
+import LogarithmicScale from './LogarithmicScale'
+
 export default class Endpaper {
   constructor ({context, viewWidth, viewHeight, aspectRatio}) {
     this.context = context
@@ -7,7 +9,7 @@ export default class Endpaper {
     this.width = this.height * aspectRatio
     this.marginLeft = viewWidth / 2 - this.width / 2  // centered
     this.marginTop = this.height * 0.1
-    this.finalDistance = this.calcFinalDistance()
+    this.zoomScale = this.setUpZoomScale()
 
     this.allAssetsLoaded = Promise.all([
       this.loadMaterial(aspectRatio)
@@ -15,6 +17,14 @@ export default class Endpaper {
   }
 
   render (scroll) {
+   /**
+    * @todo #5/DEV After very fast scroll
+    *  there is a gap between right edge of the endpaper
+    *  and right side of the screen
+    */
+    const zoom = this.zoomScale.value(scroll)
+    this.context.transform(zoom, 0, 0, zoom, 0, 0)
+
     this.context.drawImage(
       this.materialImg,
       0,
@@ -22,6 +32,15 @@ export default class Endpaper {
       this.width,
       this.height
     )
+  }
+
+  setUpZoomScale () {
+    return new LogarithmicScale({
+      minPos: 1,
+      maxPos: 0,
+      minVal: 1,
+      maxVal: 1.44
+    })
   }
 
   loadMaterial (aspectRatio) {
@@ -35,12 +54,6 @@ export default class Endpaper {
         resolve()
       }, { once: true })
     })
-  }
-
-  calcFinalDistance () {
-    const perspective = 3500
-    const scale = this.viewWidth / (2 * this.width - 1)
-    return perspective * (scale - 1) / scale
   }
 
   /**
