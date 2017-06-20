@@ -1,4 +1,6 @@
 
+## This is a [research code](https://meiert.com/en/blog/20140716/research-and-production/).
+
 [![PDD status](http://www.0pdd.com/svg?name=terales/artgorbunov-canvas-cover-poc)](http://www.0pdd.com/p?name=terales/artgorbunov-canvas-cover-poc)
 
 [Руст Кулматов](http://artgorbunov.ru/vacancies/frontender/)
