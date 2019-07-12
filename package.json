@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "webpack": "2.4.1",
-    "webpack-dev-server": "2.4.4"
+    "webpack-dev-server": "2.11.5"
   },
   "author": "Aleksander Terekhov (https://www.terales.info/)",
   "license": "MIT"
