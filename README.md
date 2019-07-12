@@ -3,6 +3,8 @@
 
 [![PDD status](http://www.0pdd.com/svg?name=terales/artgorbunov-canvas-cover-poc)](http://www.0pdd.com/p?name=terales/artgorbunov-canvas-cover-poc)
 
+[[./demo-art-gorbunov-canvas.gif|alt=Visual demo of the project]]
+
 [Руст Кулматов](http://artgorbunov.ru/vacancies/frontender/)
 > В книжном движке много работы: нужно разобраться с очередью обработки модулей,<br>
 > научить якоря правильно замедлять разворот и переверстать обложку на канвасе или СВГ.
